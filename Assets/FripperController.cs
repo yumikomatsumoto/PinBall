@@ -51,24 +51,25 @@ public class FripperController : MonoBehaviour {
             var pos = Input.touches[i].position;
 
             //タッチされたときの処理
-            if (Input.touches[i].phase == TouchPhase.Began){
+            if (Input.touches[i].phase == TouchPhase.Began) {
                 if (pos.x > Screen.width * 0.5 && tag == "RightFripperTag") {
                     rightFingerId = 0;
                     SetAngle(this.flickAngle);
                 }else if (pos.x < Screen.width * 0.5 && tag == "LeftFripperTag") {
-                    rightFingerId = 0;
+                    leftFingerId = 0;
                     SetAngle(this.flickAngle);
-
+                }
+                //指が離れた時の処理
                 }else if (Input.touches[i].phase == TouchPhase.Ended){
                     if (id == rightFingerId && tag == "RightFripperTag"){
-                        SetAngle(this.defaultAngle);
+                    rightFingerId = 0;
+                    SetAngle(this.defaultAngle);
                     }else if (id == leftFingerId && tag == "LeftFripperTag") {
-                        SetAngle(this.defaultAngle);
-
+                    leftFingerId = 0;
+                    SetAngle(this.defaultAngle);
                     }
                 }
 
-            }
         }
     }
 
